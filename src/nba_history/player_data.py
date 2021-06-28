@@ -14,7 +14,7 @@ import pandas as pd
 import time
 
 # function to scrape a list of years of NBA Drafts
-def nba_draft_data(start_year = 2017, end_year = 2020, export = True):
+def scrape_draft_data(start_year = 2017, end_year = 2020, export = True):
     # turn inputs into a list of years
     if end_year > start_year:
         years = list(range(end_year, start_year-1,-1))
@@ -124,3 +124,82 @@ def nba_draft_data(start_year = 2017, end_year = 2020, export = True):
         final_df.to_csv(export_name, index = False)
         
     return final_df
+
+
+# function to scrape a list of years for NBA PLayer total stats
+def scrape_player_total_stats(start_year = 2017, end_year = 2020, export = True):
+    # turn inputs into a list of years
+    if end_year > start_year:
+        years = list(range(end_year, start_year-1,-1))
+        
+    elif end_year < start_year:
+        years = list(range(end_year, start_year+1))
+        
+    else:
+        years = [start_year]
+    
+    # create empty final dataframe to append to in for loop
+    player_total_stats = pd.DataFrame(columns = ['Player', 'Pos', 'Age', 'Tm', 'G',
+                                           'GS', 'MP', 'FG', 'FGA', 'FG%', '3P',
+                                           '3PA', '3P%', '2P', '2PA', '2P%',
+                                           'eFG%', 'FT', 'FTA', 'FT%', 'ORB',
+                                           'DRB', 'TRB', 'AST', 'STL', 'BLK',
+                                           'TOV', 'PF', 'PTS', 'year'])
+    
+    # loop through each year in the list
+    for y in years:
+        
+        # grab URLs for year y
+        totals_url = f'https://www.basketball-reference.com/leagues/NBA_{y}_totals.html'
+        per_game_url = f'https://www.basketball-reference.com/leagues/NBA_{y}_per_game.html'
+        advanced_url = f'https://www.basketball-reference.com/leagues/NBA_{y}_advanced.html'
+        shooting_url = f'https://www.basketball-reference.com/leagues/NBA_{y}_shooting.html'
+        
+        # create bs4 object using requests and bs4
+        totals_response = requests.get(totals_url)
+        print(f"totals year {y} url response code:", totals_response.status_code)
+        html = totals_response.text
+        soup = BeautifulSoup(totals_response.content, features = 'lxml')
+        
+        # grab table column names and rows
+        column_names = [th.getText() for th in soup.findAll('tr', limit=2)[0].findAll('th')]
+        table_rows = soup.findAll('tr')[0:]
+        player_stats = [[td.getText() for td in table_rows[i].findAll('td')]
+                                for i in range(len(table_rows))]
+        
+        # drop empty rows
+        player_stats = [e for e in player_stats if len(e) > 10]
+        
+        # create dataframe for stats
+        player_stats_df = pd.DataFrame(player_stats, columns = column_names[1:])
+        # add year to dataframe
+        player_stats_df["year"] = y
+        print(len(player_stats_df['Player']), f"in the {y} season added to dataframe")
+        
+        non_dup_stats = player_stats_df.drop_duplicates(subset = 'Player',
+                                                        keep = 'first')
+        
+        pause_seconds = 2
+        print(f"pausing for {pause_seconds} seconds")
+        time.sleep(pause_seconds)
+
+        try:
+            player_total_stats = player_total_stats.append(non_dup_stats)
+            print(f"{y} total player stats data added to dataset")
+            print("length of total dataframe:", len(player_total_stats['Player']))
+            print('='*20)
+            
+        except:
+            print(f"error with year {y}, data not collected")
+            print('='*20)
+            
+        # sleep for short duration before moving onto next year
+        print('='*5, f"end of year {y}", '='*5)
+        time.sleep(2)
+            
+    # export and return the dataframe
+    if export == True:
+        export_name = f"nba_player_totals_{start_year}_to_{end_year}" + ".csv"
+        player_total_stats.to_csv(export_name, index = False)
+        
+    return player_total_stats

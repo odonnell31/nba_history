@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: nba-history
-Version: 0.0.8
+Version: 0.0.6
 Summary: scrape historical NBA data with python
 Home-page: https://github.com/odonnell31/nba_history
 Author: Michael ODonnell

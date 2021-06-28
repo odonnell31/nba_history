@@ -12,7 +12,7 @@ import pandas as pd
 import time
 
 # this function will scrape team performance by year for multiple years
-def nba_team_data(start_year = 2017, end_year = 2020, export = True):
+def scrape_nba_team_records(start_year = 2017, end_year = 2020, export = True):
     # turn inputs into a list of years
     if end_year > start_year:
         years = list(range(end_year, start_year-1,-1))
@@ -122,4 +122,4 @@ def nba_team_data(start_year = 2017, end_year = 2020, export = True):
     return final_df
 
 # test on 2015 and 2016 because 2015 is old format and 2016 is new format
-# nba_team_data(start_year = 2014, end_year = 2017)
+# scrape_nba_team_records(start_year = 2014, end_year = 2017)
