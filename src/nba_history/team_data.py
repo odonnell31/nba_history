@@ -116,7 +116,7 @@ def scrape_nba_team_records(start_year = 2017, end_year = 2020, export = True):
     
     # export and return dataframe
     if export == True:
-        export_name = f"nba_team_data_{start_year}_to_{end_year}" + ".csv"
+        export_name = f"team_data_{start_year}_to_{end_year}" + ".csv"
         final_df.to_csv(export_name, index = False)
         
     return final_df
