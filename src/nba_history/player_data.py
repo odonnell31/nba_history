@@ -152,7 +152,6 @@ def scrape_player_total_stats(start_year = 2017, end_year = 2020,
         
         # grab URLs for year y
         totals_url = f'https://www.basketball-reference.com/leagues/NBA_{y}_totals.html'
-        shooting_url = f'https://www.basketball-reference.com/leagues/NBA_{y}_shooting.html'
         
         # create bs4 object using requests and bs4
         totals_response = requests.get(totals_url)
@@ -186,11 +185,9 @@ def scrape_player_total_stats(start_year = 2017, end_year = 2020,
             player_total_stats = player_total_stats.append(non_dup_stats)
             print(f"{y} total player stats data added to dataset")
             print("length of total dataframe:", len(player_total_stats['Player']))
-            print('='*20)
             
         except:
             print(f"error with year {y}, data not collected")
-            print('='*20)
             
         # sleep for short duration before moving onto next year
         print('='*5, f"end of year {y}", '='*5)
@@ -263,11 +260,9 @@ def scrape_player_per_game_stats(start_year = 2018, end_year = 2021,
             player_per_game_stats = player_per_game_stats.append(non_dup_stats)
             print(f"{y} player per game stats data added to dataset")
             print("length of total dataframe:", len(player_per_game_stats['Player']))
-            print('='*20)
             
         except:
             print(f"error with year {y}, data not collected")
-            print('='*20)
             
         # sleep for short duration before moving onto next year
         print('='*5, f"end of year {y}", '='*5)
@@ -344,11 +339,9 @@ def scrape_player_advanced_stats(start_year = 2019, end_year = 2021,
                                                                  sort=False)
             print(f"{y} advanced player stats data added to dataset")
             print("length of total dataframe:", len(player_advanced_stats['Player']))
-            print('='*20)
             
         except:
             print(f"error with year {y}, data not collected")
-            print('='*20)
             
         # sleep for short duration before moving onto next year
         print('='*5, f"end of year {y}", '='*5)
@@ -361,4 +354,109 @@ def scrape_player_advanced_stats(start_year = 2019, end_year = 2021,
         
     return player_advanced_stats
 
-test_df3 = scrape_player_advanced_stats(start_year = 2019, end_year = 2020)
+
+# function to scrape a list of years for NBA PLayer shooting stats
+def scrape_player_shooting_stats(start_year = 2019, end_year = 2021,
+                                 export = True, sleep_time = 2):
+    # turn inputs into a list of years
+    if end_year > start_year:
+        years = list(range(end_year, start_year-1,-1))
+        
+    elif end_year < start_year:
+        years = list(range(end_year, start_year+1))
+        
+    else:
+        years = [start_year]
+    
+    # create empty final dataframe to append to in for loop
+    player_shooting_stats = pd.DataFrame(columns = ['Player', 'Pos', 'Age', 'Tm',
+                                                    'G', 'MP', 'FG%', 'Avg_Distance',
+                                                    '3P_FGassisted%', '3-10_FG%',
+                                                    '10-16_FG%', '16-3P_FG%', '3P_FG%',
+                                                    'Dunk_attempt%', '3P_FGassisted%',
+                                                    '3-10_FG%', '10-16_FG%', '16-3P_FG%',
+                                                    '3P_FG%', 'Dunk_attempt%',
+                                                    '3P_FGassisted%', 'Dunk_attempt%',
+                                                    'Dunk_attempts', 'Heave_makes',
+                                                    'Corener3_3P_attempt%', 'Corner3_FG%',
+                                                    'Heave_attempts', 'Heave_makes',
+                                                    'year'])
+    
+    # loop through each year in the list
+    for y in years:
+        
+        # grab URLs for year y
+        shooting_url = f'https://www.basketball-reference.com/leagues/NBA_{y}_shooting.html'
+        
+        # create bs4 object using requests and bs4
+        shooting_url = requests.get(shooting_url)
+        print(f"per game stats year {y} url response code:", shooting_url.status_code)
+        html = shooting_url.text
+        soup = BeautifulSoup(shooting_url.content, features = 'lxml')
+        
+        # grab table column names and rows
+        column_names = [th.getText() for th in soup.findAll('tr', limit=2)[1].findAll('th')]
+        table_rows = soup.findAll('tr')[0:]
+        player_stats = [[td.getText() for td in table_rows[i].findAll('td')]
+                                for i in range(len(table_rows))]
+        
+        # drop empty rows
+        player_stats = [e for e in player_stats if len(e) > 10]
+        
+        # create dataframe for stats
+        player_stats_df = pd.DataFrame(player_stats, columns = column_names[1:])
+        # drop empty columns
+        player_stats_df = player_stats_df.drop(player_stats_df.columns[8],
+                                               axis = 1)
+        # rename columns
+        column_mapping = {player_stats_df.columns[7]  : 'Avg_Distance',
+                          player_stats_df.columns[8]  : '2P_attempt%',
+                          player_stats_df.columns[9]  : '0-3_attempt%',
+                          player_stats_df.columns[10] : '3-10_attempt%',
+                          player_stats_df.columns[11] : '10-16_attempt%',
+                          player_stats_df.columns[12] : '16-3P_attempt%',
+                          player_stats_df.columns[13] : '3P_attempt%',
+                          player_stats_df.columns[14] : '2P_FG%',                                                                                                                    9 : '0-3_attempt%',
+                          player_stats_df.columns[15] : '3-10_FG%',
+                          player_stats_df.columns[16] : '10-16_FG%',
+                          player_stats_df.columns[17] : '16-3P_FG%',
+                          player_stats_df.columns[18] : '3P_FG%',
+                          player_stats_df.columns[19] : '2P_FGassisted%',
+                          player_stats_df.columns[20] : '3P_FGassisted%',
+                          player_stats_df.columns[21] : 'Dunk_attempt%',
+                          player_stats_df.columns[22] : 'Dunk_attempts',
+                          player_stats_df.columns[24] : 'Corener3_3P_attempt%',
+                          player_stats_df.columns[25] : 'Corner3_FG%',
+                          player_stats_df.columns[26] : 'Heave_attempts',
+                          player_stats_df.columns[27] : 'Heave_makes'}
+        player_stats_df = player_stats_df.rename(columns = column_mapping)
+        # add year to dataframe
+        player_stats_df["year"] = y
+        print(len(player_stats_df['Player']), f"in the {y} season added to dataframe")
+        
+        non_dup_stats = player_stats_df.drop_duplicates(subset = 'Player',
+                                                        keep = 'first')
+        
+        # quick pause before scraping next year
+        #print(f"pausing for {sleep_time} seconds")
+        time.sleep(sleep_time)
+
+        try:
+            player_shooting_stats = player_shooting_stats.append(non_dup_stats,
+                                                                 sort=False)
+            print(f"{y} player shooting stats data added to dataset")
+            print("length of total dataframe:", len(player_shooting_stats['Player']))
+            
+        except:
+            print(f"error with year {y}, data not collected")
+            
+        # sleep for short duration before moving onto next year
+        print('='*5, f"end of year {y}", '='*5)
+        time.sleep(sleep_time)
+            
+    # export and return the dataframe
+    if export == True:
+        export_name = f"player_shooting_{start_year}_to_{end_year}" + ".csv"
+        player_shooting_stats.to_csv(export_name, index = False)
+        
+    return player_shooting_stats

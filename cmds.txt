@@ -1,0 +1,6 @@
+command prompt commands
+1. cd "...\nba_history"
+2. python -m build
+3. python -m twine upload --skip-existing dist/*
+	username: __token__
+	password:
