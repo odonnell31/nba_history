@@ -4,97 +4,47 @@ nba_history
 .. image:: https://badge.fury.io/py/nba-history.svg
     :target: PyPI_
     :alt: nba_history page on the Python Package Index
-.. image:: https://img.shields.io/gitter/room/movie-py/gitter?color=46BC99&logo=gitter
-    :target: Gitter_
-    :alt: Discuss MoviePy on Gitter
-.. image:: https://img.shields.io/github/workflow/status/Zulko/moviepy/Run%20Test%20Suite?logo=github
-    :target: https://github.com/Zulko/moviepy/actions?query=workflow%3A%22Run+Test+Suite%22
-    :alt: Build status on gh-actions
-.. image:: https://img.shields.io/coveralls/github/Zulko/moviepy/master?logo=coveralls
-    :target: https://coveralls.io/github/Zulko/moviepy?branch=master
+.. image:: https://img.shields.io/badge/nba__history-100%25-green
+    :target: https://shields.io/category/coverage
     :alt: Code coverage from coveralls.io
 
-MoviePy (full documentation_) is a Python library for video editing: cutting, concatenations, title insertions, video compositing (a.k.a. non-linear editing), video processing, and creation of custom effects. See the gallery_ for some examples of use.
+nba_history is a python library for dynamically scraping NBA player, team, and draft data.
 
-MoviePy can read and write all the most common audio and video formats, including GIF, and runs on Windows/Mac/Linux, with Python 3.6+. Here it is in action in an IPython notebook:
+nba_history returns all scraped data as a pandas dataframe with an additional option to export results as a CSV.
 
-.. image:: https://raw.githubusercontent.com/Zulko/moviepy/master/docs/demo_preview.jpeg
-    :alt: [logo]
-    :align: center
-
-Example
--------
-
-In this example we open a video file, select the subclip between t=50s and t=60s, add a title at the center of the screen, and write the result to a new file:
+A short example of the nba_history function scrape_draft_data is below:
 
 .. code:: python
 
-    from moviepy import *
+    from nba_history import player_data, team_data
 
-    video = VideoFileClip("myHolidays.mp4").subclip(50,60)
+	# scrape 2013 NBA draft picks
+    df = player_data.scrape_draft_data(start_year = 2013,
+									   end_year = 2013,
+									   export = False)
+	print(draft_picks_df.head())
 
-    # Make the text. Many more options are available.
-    txt_clip = ( TextClip("My Holidays 2013",fontsize=70,color='white')
-                 .with_position('center')
-                 .with_duration(10) )
+.. image:: https://github.com/odonnell31/nba_history/blob/main/docs/img/draft_picks_example.png
+    :alt: [logo]
+    :align: center
 
-    result = CompositeVideoClip([video, txt_clip]) # Overlay text on video
-    result.write_videofile("myHolidays_edited.webm",fps=25) # Many options...
-
-
-Maintainers wanted!
--------------------
-
-As there are more and more people seeking support (270 open issues as of Jan. 2021!) and all the MoviePy maintainers seem busy, we'd love to hear about developers interested in giving a hand and solving some of the issues (especially the ones that affect you) or reviewing pull requests. Open an issue or contact us directly if you are interested. Thanks!
-
+	
 Installation
 ------------
 
-MoviePy depends on the Python modules NumPy_, Imageio_, Decorator_, and Proglog_, which will be automatically installed during MoviePy's installation. The software FFMPEG should be automatically downloaded/installed (by imageio) during your first use of MoviePy (installation will take a few seconds). If you want to use a specific version of FFMPEG, follow the instructions in ``config_defaults.py``. In case of trouble, provide feedback.
+nba_history depends on the Python modules requests_, beautifulsoup_, and pandas_
+
+**Installation with pip:** if you have ``pip`` installed, just type this in a terminal:
+
+.. code:: bash
+
+    $ pip install nba_history
 
 **Installation by hand:** download the sources, either from PyPI_ or, if you want the development version, from GitHub_, unzip everything into one folder, open a terminal and type:
 
 .. code:: bash
 
     $ (sudo) python setup.py install
-
-**Installation with pip:** if you have ``pip`` installed, just type this in a terminal:
-
-.. code:: bash
-
-    $ (sudo) pip install moviepy
-
-If you have neither ``setuptools`` nor ``ez_setup`` installed, the command above will fail. In this case type this before installing:
-
-.. code:: bash
-
-    $ (sudo) pip install setuptools
-
-
-Optional but useful dependencies
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can install ``moviepy`` with all dependencies via:
-
-.. code:: bash
-
-    $ (sudo) pip install moviepy[optional]
-
-ImageMagick_ is not strictly required, but needed if you want to incorporate texts. It can also be used as a backend for GIFs, though you can also create GIFs with MoviePy without ImageMagick.
-
-Once you have installed ImageMagick, MoviePy will try to autodetect the path to its executable. If it fails, you can still configure it by setting environment variables (see the documentation).
-
-PyGame_ is needed for video and sound previews (not relevant if you intend to work with MoviePy on a server but essential for advanced video editing by hand).
-
-For advanced image processing, you will need one or several of the following packages:
-
-- The Python Imaging Library (PIL) or, even better, its branch Pillow_.
-- Scipy_ (for tracking, segmenting, etc.) can be used to resize video clips if PIL and OpenCV are not installed.
-- `Scikit Image`_ may be needed for some advanced image manipulation.
-- `OpenCV 2.4.6`_ or a more recent version (one that provides the package ``cv2``) may be needed for some advanced image manipulation.
-- `Matplotlib`_
-
-For instance, using the method ``clip.resize`` requires that at least one of Scipy, PIL, Pillow or OpenCV is installed.
 
 
 Documentation
@@ -123,32 +73,11 @@ More information is available from the `Sphinx`_ documentation.
 New in 1.0.0: Progress bars and messages with Proglog
 -------------------------------------------------------
 
-Non-backwards-compatible changes were introduced in 1.0.0 to
-manage progress bars and messages using
-`Proglog <https://github.com/Edinburgh-Genome-Foundry/Proglog>`_, which
-enables to display nice progress bars in the console as well as in
-a Jupyter notebook or any user interface, like a website.
-
-To display notebook friendly progress bars, first install IPyWidgets:
-
-.. code::
-
-    sudo pip install ipywidgets
-    sudo jupyter nbextension enable --py --sys-prefix widgetsnbextension
-
-Then at the beginning of your notebook enter:
-
-.. code:: python
-
-    import proglog
-    proglog.notebook()
-
-Have a look at the Proglog project page for more options.
 
 Contribute
 ----------
 
-MoviePy is open-source software originally written by Zulko_ and released under the MIT licence. The project is hosted on GitHub_, where everyone is welcome to contribute, ask for help or simply give feedback. Please read our `Contributing Guidelines`_ for more information about how to contribute!
+nba_history is open-source library originally written by odonnell31_ and released under the MIT licence. The project is hosted on GitHub_, where everyone is welcome to contribute, ask for help or simply give feedback. Please read the `Contributing Guidelines`_ for more information about how to contribute!
 
 You can also discuss the project on Reddit_ or Gitter_. These are preferred over GitHub issues for usage questions and examples.
 
@@ -156,16 +85,7 @@ You can also discuss the project on Reddit_ or Gitter_. These are preferred over
 Maintainers
 -----------
 
-- Zulko_ (owner)
-- `@tburrows13`_
-- `@mgaitan`_
-- `@earney`_
-- `@mbeacom`_
-- `@overdrivr`_
-- `@keikoro`_
-- `@ryanfox`_
-- `@mondeja`_
-
+- odonnell31_ (owner)
 
 .. MoviePy links
 .. _gallery: https://zulko.github.io/moviepy/gallery.html
