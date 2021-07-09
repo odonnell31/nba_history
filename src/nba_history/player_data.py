@@ -460,3 +460,67 @@ def scrape_player_shooting_stats(start_year = 2019, end_year = 2021,
         player_shooting_stats.to_csv(export_name, index = False)
         
     return player_shooting_stats
+
+
+# function to scrape All Stars by year
+def scrape_all_stars(export = True):
+        
+    # grab wikipedia URL of all-stars
+    url = 'https://en.wikipedia.org/wiki/List_of_NBA_All-Stars'
+    
+    # create bs4 object using requests and bs4
+    response = requests.get(url)
+    print(f"all-stars url response code:", response.status_code)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    # grab full table
+    nba_table = soup.findAll('table')[1]
+    
+    # turn table to dataframe
+    all_stars_df = pd.read_html(str(nba_table))
+    all_stars_df = pd.DataFrame(all_stars_df[0])
+    
+    # add hall of fame denomination to dataframe
+    for idx, row in all_stars_df.iterrows():
+        if '*' in row["Player"]:
+            all_stars_df.loc[idx, "hall_of_fame"] = 1
+            all_stars_df.loc[idx, "active_player"] = 0
+            all_stars_df.loc[idx, "hof_eligible"] = 1
+        elif '^' in row["Player"]:
+            all_stars_df.loc[idx, "hall_of_fame"] = 0
+            all_stars_df.loc[idx, "active_player"] = 1
+            all_stars_df.loc[idx, "hof_eligible"] = 0
+        elif '†' in row["Player"]:
+            all_stars_df.loc[idx, "hall_of_fame"] = 0
+            all_stars_df.loc[idx, "active_player"] = 0
+            all_stars_df.loc[idx, "hof_eligible"] = 0
+        else:
+            all_stars_df.loc[idx, "hall_of_fame"] = 0
+            all_stars_df.loc[idx, "active_player"] = 0
+            all_stars_df.loc[idx, "hof_eligible"] = 1
+    
+    # remove extra characters from PLayer columns       
+    for c in "*^†":     
+        all_stars_df["Player"] = all_stars_df["Player"].str.replace(c, '')
+        
+    #for a in [r"[a]", r"[b]"]:
+    #    #substring = f"[{a}]"
+    #    all_stars_df["Player"] = all_stars_df["Player"].str.replace(a, '')
+    
+    # delete extra columns
+    all_stars_df = all_stars_df.drop('Reference', 1)
+    
+    # rename columns
+    # rename final_df columns
+    all_stars_df = all_stars_df.rename(columns =
+                                          all_stars_df.columns[1]: "Selections",
+                                          all_stars_df.columns[2]: "Years"})
+    
+    # export and return the dataframe
+    if export == True:
+        export_name = "nba_all_stars.csv"
+        all_stars_df.to_csv(export_name, index = False)
+        
+    return all_stars_df
+
+test_all_stars7 = scrape_all_stars(export = False)
