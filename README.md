@@ -1,16 +1,14 @@
 # nba_history
 -----------------
+[![Version](https://badge.fury.io/py/nba-history.svg)](https://badge.fury.io/py/nba-history.svg)
+[![Downloads](https://pepy.tech/badge/nba-history)](https://pepy.tech/project/nba-history)
+[![Coverage](https://img.shields.io/badge/nba__history-100%25-brightgreen)](https://img.shields.io/badge/nba__history-100%25-brightgreen)
 
 **nba_history** is a python package for dynamically scraping NBA player, team, and draft data.
 
 All nba_history functions return scraped data as a `pandas dataframe` with an option to also export to `CSV`.
 
-[![Version](https://badge.fury.io/py/nba-history.svg)](https://badge.fury.io/py/nba-history.svg)
-[![Downloads](https://pepy.tech/badge/nba-history)](https://pepy.tech/project/nba-history)
-[![Coverage](https://img.shields.io/badge/nba__history-100%25-brightgreen)](https://img.shields.io/badge/nba__history-100%25-brightgreen)
-
-## example
-
+## Example
 A *short example for scaping NBA draft data* is below:
 
 ```python
@@ -29,8 +27,7 @@ print(df.head())
 
 
 ## Installation
-
-nba_history depends on the Python modules [requests!](https://pypi.org/project/requests/), [beautifulsoup!](https://pypi.org/project/beautifulsoup4/), and [pandas!](https://pypi.org/project/pandas/)
+nba_history depends on the Python modules [requests](https://pypi.org/project/requests/), [beautifulsoup](https://pypi.org/project/beautifulsoup4/), and [pandas](https://pypi.org/project/pandas/)
 
 **Installation with pip:** if you have ``pip`` installed, type this in a terminal:
 
@@ -38,21 +35,19 @@ nba_history depends on the Python modules [requests!](https://pypi.org/project/r
 $ python -m pip install nba_history
 ```
 
-**Installation by hand:** download the sources, either from [PyPI!](https://pypi.org/project/nba-history/) or, if you want the development version, from [GitHub!](https://github.com/odonnell31/nba_history), unzip everything into one folder, open a terminal and type:
+**Installation by hand:** download the sources, either from [PyPI](https://pypi.org/project/nba-history/) or, if you want the development version, from [GitHub](https://github.com/odonnell31/nba_history), unzip everything into one folder, open a terminal and type:
 
 ```console
 $ (sudo) python setup.cfg install
 ```
 
 -----------------
-## Documentation
+# Documentation
+The nba_history package has 2 modules, [player_data](https://raw.githubusercontent.com/odonnell31/nba_history/master/src/nba_history/player_data.py) and [team_data](https://raw.githubusercontent.com/odonnell31/nba_history/master/src/nba_history/team_data.py)
 
-The nba_history package has 2 modules, [player_data!](https://raw.githubusercontent.com/odonnell31/nba_history/master/src/nba_history/player_data.py) and [team_data!](https://raw.githubusercontent.com/odonnell31/nba_history/master/src/nba_history/team_data.py)
-
-### player_data functions
+### List of all functions in player_data module
 
 #### scrape_draft_data
-
 Scrape NBA draft data by year, including:
 * draft round
 * draft pick number
@@ -74,7 +69,6 @@ df = player_data.scrape_draft_data(start_year = 2017,
 ```
 
 #### scrape_player_total_stats
-
 Scrape NBA player total stats by year, including:
 * Points
 * Rebounds
@@ -100,7 +94,6 @@ df = player_data.scrape_player_total_stats(start_year = 2011,
 ```
 
 #### scrape_player_per_game_stats
-
 Scrape NBA player per game stats by year, including:
 * Points
 * Rebounds
@@ -125,7 +118,6 @@ df = player_data.scrape_player_per_game_stats(start_year = 2000,
 ```
 
 #### scrape_player_advanced_stats
-
 Scrape NBA player advanced stats by year, including:
 * PER
 * WS
@@ -149,7 +141,6 @@ df = player_data.scrape_player_advanced_stats(start_year = 1998,
 ```
 
 #### scrape_player_shooting_stats
-
 Scrape NBA player shooting stats by year, including:
 * Dunks
 * FG% by distance
@@ -173,7 +164,6 @@ df = player_data.scrape_player_shooting_stats(start_year = 1980,
 ```
 
 #### scrape_all_stars
-
 Scrape all NBA All-Stars for alltime, including:
 * Hall of Fame status
 * All Star appearances
@@ -188,10 +178,9 @@ from nba_history import player_data
 df = player_data.scrape_all_stars(export = True)
 ```
 
-### team_data functions
+### List of all functions in team_data module
 
 #### scrape_nba_team_records
-
 Scrape NBA team records by year, including:
 * Playoff appearance
 * Wins
@@ -215,9 +204,7 @@ df = team_data.scrape_nba_team_records(start_year = 2010,
 
 
 ## Contribute
-
-nba_history is open-source library originally written by [odonnell31!](https://github.com/odonnell31) and released under the MIT licence. The project is hosted on [GitHub!](https://github.com/odonnell31/nba_history), where everyone is welcome to contribute, ask for help or simply give feedback.
+nba_history is open-source library originally written by [odonnell31](https://github.com/odonnell31) and released under the MIT licence. The project is hosted on [GitHub](https://github.com/odonnell31/nba_history), where everyone is welcome to contribute, ask for help or simply give feedback.
 
 ## Maintainers
-
-* [@odonnell31!](https://github.com/odonnell31) (owner)
+* [@odonnell31](https://github.com/odonnell31) (owner)
