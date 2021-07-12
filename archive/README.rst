@@ -4,13 +4,13 @@ nba_history
 .. image:: https://badge.fury.io/py/nba-history.svg
     :target: PyPI_
     :alt: nba_history page on the Python Package Index
-.. image:: https://img.shields.io/badge/nba__history-100%25-green
+.. image:: https://img.shields.io/badge/nba__history-100%25-brightgreen
     :target: https://shields.io/category/coverage
     :alt: Code coverage from coveralls.io
 
-nba_history is a python library for dynamically scraping NBA player, team, and draft data.
+nba_history is a python package for dynamically scraping NBA player, team, and draft data.
 
-nba_history returns all scraped data as a pandas dataframe with an additional option to export results as a CSV.
+nba_history returns all scraped data as a pandas dataframe with an option to also export results as a CSV.
 
 A short example of the nba_history function scrape_draft_data is below:
 
@@ -20,8 +20,8 @@ A short example of the nba_history function scrape_draft_data is below:
 
 	# scrape 2013 NBA draft picks
     df = player_data.scrape_draft_data(start_year = 2013,
-									   end_year = 2013,
-									   export = False)
+		end_year = 2013,
+		export = False)
 	print(draft_picks_df.head())
 
 .. image:: https://github.com/odonnell31/nba_history/blob/main/docs/img/draft_picks_example.png
@@ -50,28 +50,9 @@ nba_history depends on the Python modules requests_, beautifulsoup_, and pandas_
 Documentation
 -------------
 
-Building the documentation has additional dependencies that require installation.
+The nba_history package has 2 modules, player_data and team_data
 
-.. code:: bash
-
-    $ (sudo) pip install moviepy[doc]
-
-The documentation can be generated and viewed via:
-
-.. code:: bash
-
-    $ python setup.py build_docs
-
-You can pass additional arguments to the documentation build, such as clean build:
-
-.. code:: bash
-
-    $ python setup.py build_docs -E
-
-More information is available from the `Sphinx`_ documentation.
-
-New in 1.0.0: Progress bars and messages with Proglog
--------------------------------------------------------
+Inside the player_data module are the following scraping functions
 
 
 Contribute
@@ -79,7 +60,7 @@ Contribute
 
 nba_history is open-source library originally written by odonnell31_ and released under the MIT licence. The project is hosted on GitHub_, where everyone is welcome to contribute, ask for help or simply give feedback. Please read the `Contributing Guidelines`_ for more information about how to contribute!
 
-You can also discuss the project on Reddit_ or Gitter_. These are preferred over GitHub issues for usage questions and examples.
+You can also discuss the project on Reddit_. This is preferred over GitHub issues for usage questions and examples.
 
 
 Maintainers

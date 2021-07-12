@@ -5,7 +5,6 @@ import os
 import sys
 from codecs import open
 
-
 try:
     from setuptools import find_packages, setup
     from setuptools.command.test import test as TestCommand
@@ -66,9 +65,9 @@ if "build_docs" in sys.argv:
 
     cmdclass["build_docs"] = BuildDoc
 
-__version__ = None
-with open(os.path.join("moviepy", "version.py"), "r", "utf-8") as f:
-    __version__ = f.read().split(" ")[2].strip("\n").strip('"')
+__version__ = "1.0.2"
+#with open(os.path.join("nba_history", "src", "version.py"), "r", "utf-8") as f:
+#    __version__ = f.read().split(" ")[2].strip("\n").strip('"')
 
 
 # Define the requirements for specific execution needs.
@@ -102,7 +101,6 @@ lint_reqs = [
 ]
 
 extra_reqs = {
-    "optional": optional_reqs,
     "doc": doc_reqs,
     "test": test_reqs,
     "lint": lint_reqs,
@@ -145,5 +143,4 @@ setup(
     },
     tests_require=test_reqs,
     install_requires=requires,
-    extras_require=extra_reqs,
 )

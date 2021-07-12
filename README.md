@@ -1,24 +1,3 @@
-Metadata-Version: 2.1
-Name: nba-history
-Version: 1.0.7
-Summary: UNKNOWN
-Home-page: https://github.com/odonnell31/nba_history
-Author: Michael ODonnell
-Author-email: mro4354@gmail.com
-License: UNKNOWN
-Project-URL: Bug Tracker, https://github.com/odonnell31/nba_history
-Keywords: nba,basketball,scraping,data mining,basketball reference,bs4
-Platform: UNKNOWN
-Classifier: Programming Language :: Python
-Classifier: Programming Language :: Python :: 3
-Classifier: License :: OSI Approved :: MIT License
-Classifier: Operating System :: OS Independent
-Classifier: Intended Audience :: Developers
-Classifier: Natural Language :: English
-Requires-Python: >=3.6
-Description-Content-Type: text/markdown
-License-File: LICENSE
-
 # nba_history
 
 **nba_history** is a python package for dynamically scraping NBA player, team, and draft data.
@@ -80,4 +59,3 @@ You can also discuss the project on Reddit. This is preferred over GitHub issues
 ## Maintainers
 
 odonnell31 (owner)
-

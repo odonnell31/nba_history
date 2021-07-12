@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: nba-history
-Version: 1.0.7
+Version: 1.0.6
 Summary: UNKNOWN
 Home-page: https://github.com/odonnell31/nba_history
 Author: Michael ODonnell
@@ -78,6 +78,7 @@ You can also discuss the project on Reddit. This is preferred over GitHub issues
 
 
 ## Maintainers
+-----------
 
-odonnell31 (owner)
+- odonnell31 (owner)
 
