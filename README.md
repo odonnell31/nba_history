@@ -1,8 +1,8 @@
-# nba_history
+![Alt text](https://raw.githubusercontent.com/odonnell31/nba_history/master/docs/img/logos/nba_history_logo_v1j.jpg)
 -----------------
 [![Version](https://badge.fury.io/py/nba-history.svg)](https://badge.fury.io/py/nba-history.svg)
 [![Downloads](https://pepy.tech/badge/nba-history)](https://pepy.tech/project/nba-history)
-[![Coverage](https://img.shields.io/badge/nba__history-100%25-brightgreen)](https://img.shields.io/badge/nba__history-100%25-brightgreen)
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://img.shields.io/badge/coverage-100%25-brightgreen)
 
 **nba_history** is a python package for dynamically scraping NBA player, team, and draft data.
 
