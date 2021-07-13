@@ -9,7 +9,6 @@
 All nba_history functions return scraped data as a `pandas dataframe` with an option to also export to `CSV`.
 
 ## Example
-A *short example for scaping NBA draft data* is below:
 
 ```python
 from nba_history import player_data, team_data
@@ -56,9 +55,9 @@ Scrape NBA draft data by year, including:
 * and much more..
 
 function arguments
-*start_year*: first year to scrape
-*end_year*: last year to scrape
-*export*: option to export to CSV. Default is set as *True*
+* *start_year*: first year to scrape
+* *end_year*: last year to scrape
+* *export*: option to export to CSV. Default is set as *True*
 
 ```python
 from nba_history import player_data
