@@ -513,7 +513,7 @@ def scrape_all_stars(export = True):
     # rename columns
     # rename final_df columns
     all_stars_df = all_stars_df.rename(columns =
-                                          all_stars_df.columns[1]: "Selections",
+                                          {all_stars_df.columns[1]: "Selections",
                                           all_stars_df.columns[2]: "Years"})
     
     # export and return the dataframe
@@ -523,4 +523,69 @@ def scrape_all_stars(export = True):
         
     return all_stars_df
 
-test_all_stars7 = scrape_all_stars(export = False)
+
+# function to scrape a list of years for NBA PLayer shooting stats
+def scrape_player_contracts(start_year = 2015, end_year = 2016,
+                                 export = True, sleep_time = 2):
+    # turn inputs into a list of years
+    if end_year > start_year:
+        years = list(range(end_year, start_year-1,-1))
+        
+    elif end_year < start_year:
+        years = list(range(end_year, start_year+1))
+        
+    else:
+        years = [start_year]
+    
+    # create empty final dataframe to append to in for loop
+    player_contracts = pd.DataFrame(columns = ['Player', 'Salary', 'Rank', 'Year'])
+    
+    # loop through each year in the list
+    for y in years:
+        
+        # grab URLs for year y
+        y1 = y+1
+        contracts_url = f'https://hoopshype.com/salaries/players/{y}-{y1}/'
+        
+        # create bs4 object using requests and bs4
+        response = requests.get(contracts_url)
+        print(f"contracts year {y} url response code:", response.status_code)
+        html = response.text
+        soup = BeautifulSoup(html, features = 'html.parser')
+        
+        # grab table column names and rows
+        salary_table = soup.find('table')
+        length=len(salary_table.find_all("td"))
+        players = [salary_table.find_all("td")[i].text.strip() for i in range(5,length,4)]
+        salaries = [salary_table.find_all("td")[i].text.strip() for i in range(6,length,4)]
+        
+        # turn rows into dataframe
+        salary_df = pd.DataFrame({"Player" : players,
+                                  "Salary" : salaries,
+                                  "Rank" : [i for i in range(1, len(salaries)+1)]})
+        salary_df["Year"] = y
+
+        # add year to dataframe
+        print(len(salary_df['Player']), f"in the {y} season added to dataframe")
+        
+        # quick pause before scraping next year
+        time.sleep(sleep_time)
+
+        try:
+            player_contracts = player_contracts.append(salary_df, sort=False)
+            print(f"{y} player contracts added to dataset")
+            print("length of total dataframe:", len(player_contracts['Player']))
+            
+        except:
+            print(f"error with year {y}, data not collected")
+            
+        # sleep for short duration before moving onto next year
+        print('='*5, f"end of year {y}", '='*5)
+        time.sleep(sleep_time)
+            
+    # export and return the dataframe
+    if export == True:
+        export_name = f"player_contracts_{start_year}_to_{end_year}" + ".csv"
+        player_contracts.to_csv(export_name, index = False)
+        
+    return player_contracts
