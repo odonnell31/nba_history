@@ -1,4 +1,4 @@
-![Alt text](https://raw.githubusercontent.com/odonnell31/nba_history/master/docs/img/logos/nba_history_logo_v1j.jpg)
+![Alt text](https://raw.githubusercontent.com/odonnell31/nba_history/master/docs/img/logos/nba_history_logo_v3j.jpg)
 -----------------
 [![Version](https://badge.fury.io/py/nba-history.svg)](https://badge.fury.io/py/nba-history.svg)
 [![Downloads](https://pepy.tech/badge/nba-history)](https://pepy.tech/project/nba-history)
