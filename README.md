@@ -55,9 +55,10 @@ Scrape NBA draft data by year, including:
 * years in the NBA
 * and much more..
 
-`start_year`: first year to scrape
-`end_year`: last year to scrape
-`export`: option to export to CSV. Default is set as *True*
+function arguments
+*start_year*: first year to scrape
+*end_year*: last year to scrape
+*export*: option to export to CSV. Default is set as *True*
 
 ```python
 from nba_history import player_data
@@ -74,10 +75,11 @@ Scrape NBA player salary by year, including:
 * Player
 * Salary
 
-`start_year`: first year to scrape
-`end_year`: last year to scrape
-`export`: option to export to CSV. Default is set as *True*
-`sleep_time`: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
+function arguments:
+*start_year*: first year to scrape
+*end_year*: last year to scrape
+*export*: option to export to CSV. Default is set as *True*
+*sleep_time*: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
 
 ```python
 from nba_history import player_data
@@ -99,10 +101,11 @@ Scrape NBA player total stats by year, including:
 * 3PA
 * and much more..
 
-`start_year`: first year to scrape
-`end_year`: last year to scrape
-`export`: option to export to CSV. Default is set as *True*
-`sleep_time`: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
+function arguments:
+*start_year*: first year to scrape
+*end_year*: last year to scrape
+*export*: option to export to CSV. Default is set as *True*
+*sleep_time*: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
 
 ```python
 from nba_history import player_data
@@ -123,10 +126,11 @@ Scrape NBA player per game stats by year, including:
 * 3P%
 * and much more..
 
-`start_year`: first year to scrape
-`end_year`: last year to scrape
-`export`: option to export to CSV. Default is set as *True*
-`sleep_time`: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
+function arguments:
+*start_year*: first year to scrape
+*end_year*: last year to scrape
+*export*: option to export to CSV. Default is set as *True*
+*sleep_time*: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
 
 ```python
 from nba_history import player_data
@@ -146,10 +150,11 @@ Scrape NBA player advanced stats by year, including:
 * 3PAr
 * and much more..
 
-`start_year`: first year to scrape
-`end_year`: last year to scrape
-`export`: option to export to CSV. Default is set as *True*
-`sleep_time`: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
+function arguments:
+*start_year*: first year to scrape
+*end_year*: last year to scrape
+*export*: option to export to CSV. Default is set as *True*
+*sleep_time*: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
 
 ```python
 from nba_history import player_data
@@ -169,10 +174,11 @@ Scrape NBA player shooting stats by year, including:
 * Corner 3PT%
 * and much more..
 
-`start_year`: first year to scrape
-`end_year`: last year to scrape
-`export`: option to export to CSV. Default is set as *True*
-`sleep_time`: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
+function arguments:
+*start_year*: first year to scrape
+*end_year*: last year to scrape
+*export*: option to export to CSV. Default is set as *True*
+*sleep_time*: time to pause function between sraping each year. Default is set as 2 seconds, if scraping >10 years then changing to 1 second is recommended.
 
 ```python
 from nba_history import player_data
@@ -190,7 +196,8 @@ Scrape all NBA All-Stars for alltime, including:
 * All Star appearances
 * and more..
 
-`export`: option to export to CSV. Default is set as *True*
+function arguments:
+*export*: option to export to CSV. Default is set as *True*
 
 ```python
 from nba_history import player_data
@@ -209,9 +216,10 @@ Scrape NBA team records by year, including:
 * PPG
 * and much more..
 
-`start_year`: first year to scrape
-`end_year`: last year to scrape
-`export`: option to export to CSV. Default is set as *True*
+function arguments:
+*start_year*: first year to scrape
+*end_year*: last year to scrape
+*export*: option to export to CSV. Default is set as *True*
 
 ```python
 from nba_history import team_data
