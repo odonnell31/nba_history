@@ -525,7 +525,7 @@ def scrape_all_stars(export = True):
 
 
 # function to scrape a list of years for NBA PLayer shooting stats
-def scrape_player_contracts(start_year = 2015, end_year = 2016,
+def scrape_player_salaries(start_year = 2015, end_year = 2016,
                                  export = True, sleep_time = 2):
     # turn inputs into a list of years
     if end_year > start_year:
