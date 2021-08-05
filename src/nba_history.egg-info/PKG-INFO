@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: nba-history
-Version: 1.1.6
+Version: 1.1.7
 Summary: UNKNOWN
 Home-page: https://github.com/odonnell31/nba_history
 Author: Michael ODonnell
@@ -19,7 +19,7 @@ Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-![Alt text](https://raw.githubusercontent.com/odonnell31/nba_history/master/docs/img/logos/nba_history_logo_alt_v3.png)
+![Alt text](https://raw.githubusercontent.com/odonnell31/nba_history/master/docs/img/logos/nba_history_logo_alt_v4.png)
 -----------------
 [![Version](https://badge.fury.io/py/nba-history.svg)](https://badge.fury.io/py/nba-history.svg)
 [![Downloads](https://pepy.tech/badge/nba-history)](https://pepy.tech/project/nba-history)
